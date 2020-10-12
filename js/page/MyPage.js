@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Header} from "react-native-elements";
 import GlobalStyles from '../res/styles/GlobalStyles';
 import {MORE_MENU} from '../common/MORE_MENU';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,6 +9,8 @@ class MyPage extends Component<Props> {
     render() {      
         return (
             <View style={GlobalStyles.root_container}>
+                 <Header placement="left" centerComponent={{ text: '我的', style: { color: '#333'} }} 
+                    containerStyle={{backgroundColor: 'white'}}/>
                 <ScrollView>
                 <TouchableOpacity
                         style={styles.item}

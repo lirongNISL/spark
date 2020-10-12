@@ -18,7 +18,9 @@ import AboutPage from '../page/about/AboutPage';
 import AboutMePage from '../page/about/AboutMePage';
 import NewProjectPage from '../page/NewProjectPage';
 import HotProjectPage from '../page/HotProjectPage';
-
+import ProjectAlbumPage from '../page/ProjectAlbumPage';
+import LisPage from '../page/ListPage';
+import ProjectList from '../page/ProjectList';
 // Project_Album
 // Train_Album
 // Activity_Album
@@ -149,13 +151,25 @@ const MainNavigator = createStackNavigator({
         navigationOptions: {
             headerShown: false,// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar
         },
+    },  
+    ProjectAlbumPage: {
+        screen: ProjectAlbumPage,
+        navigationOptions: {
+            headerShown: false,// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar
+        },
     },
-    // Project_AlbumPage: {
-    //     screen: NewProjectPage,
-    //     navigationOptions: {
-    //         headerShown: false,// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar
-    //     },
-    // },
+    LisPage:{
+        screen: LisPage,
+        navigationOptions: {
+            headerShown: false,// 可以通过将header设为null 来禁用StackNavigator的Navigation Bar
+        },
+    },
+    ProjectList:{
+        screen:ProjectList,
+        navigationOptions:{
+            headerShown:false,
+        }
+    }
     // TrainAlbumPage: {
     //     screen: TrainAlbumPage,
     //     navigationOptions: {

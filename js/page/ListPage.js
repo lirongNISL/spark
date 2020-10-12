@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import {View,Text,StyleSheet,FlatList,Image,SafeAreaView} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {Header} from "react-native-elements";
 import hot from '../res/data/hot.json';
-import Banner from '../common/Banner';
-import navBar from '../common/NavigationBar';
-import list from '../res/data/tab.json';
-import TopNav from '../navigator/materialTopTabNavigator';
-class HotProjectPage extends Component<Props> {
+class ListPage extends Component<Props> {
     constructor(props) {
         super(props);
     }
@@ -18,24 +13,16 @@ class HotProjectPage extends Component<Props> {
     shouldComponentUpdate (nextProps, nextState) { return true };
 
     render() {
-        return(
-            <View style={styles.container}>
-                 <Header placement="left" centerComponent={{ text: '热门项目', style: { color: '#333'} }} 
-                    containerStyle={{backgroundColor: 'white'}} leftComponent={{ icon: 'menu', color: '#333' }}/>
-                 {/* <Banner/>  */}
-                <Image source={require('../res/img/b1.jpg')} style={styles.image} resizeMode="cover"/>                                         
-                <TopNav></TopNav>              
-         </View>
+        return(                         
+            <SafeAreaView >  
+                <View style={{padding:0,margin:0,width:'100%'}}>
+                    <FlatList  data={hot}  renderItem={this.renderProject}
+                        keyExtractor={item =>item.id}/>
+                </View> 
+            </SafeAreaView>                      
         )
     }
-    renderItem({item}){
-        return(
-            <View style={styles.tab}>
-                <Text style={styles.tabText}>{item.name}</Text>
-            </View>
-        )
-    }
-
+   
     renderProject({item}){
         return(
           <View style={{padding: 0,marginBottom:10,width:'100%'}}>                       
@@ -58,13 +45,11 @@ class HotProjectPage extends Component<Props> {
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        padding:0,
-        margin:0,
     },
-    image:{
-        width:'100%',
-        height:140,
-       marginTop:5
+    welcome:{
+        fontSize:20,
+        textAlign:'center',
+        margin:10,
     },
     inistuitionItem:{
         padding:10,
@@ -94,17 +79,6 @@ const styles = StyleSheet.create({
         paddingTop:10
       
     },
-    tab:{
-        height:50,
-        padding:5,
-        borderBottomWidth:1,
-        borderBottomColor:'blue',
-       
-    },
-    tabText:{
-        color:'blue',
-        fontSize:16
-    }
 })
 
-export default  HotProjectPage;
+export default  ListPage;

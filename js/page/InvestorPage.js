@@ -1,8 +1,9 @@
 
 import React, {Component} from 'react';
-import {StyleSheet,  Text, View, ScrollView} from 'react-native';
-import {Card, ListItem, Button, SearchBar,Icon } from 'react-native-elements';
-
+import {StyleSheet,  Text, View, FlatList,Image, Alert} from 'react-native';
+import {Card, ListItem, Button, SearchBar,Icon,Avatar,Header } from 'react-native-elements';
+import GlobalStyles from '../res/styles/GlobalStyles';
+import imgList from './imgList';
 type Props = {};
 
 class InvestorPage extends Component<Props> {
@@ -15,51 +16,45 @@ class InvestorPage extends Component<Props> {
     updateSearch = (search) => {
         this.setState({ search });
     };
+    
+    renderItem({item}){    
+        return(
+            <View>
+                <View style={styles.Cards}>  
+                           
+                    <Avatar style={styles.left} size="large" rounded source={item.image} onPress={() => { }} activeOpacity={0.7}/>
+                    <View style={styles.right}>                                                              
+                        <Text class="mz_name left">{item.name}</Text>
+                        <View >                                               
+                            <Text style={{color:'#797979'}}>{item.label}</Text>
+                        </View>
+                        <View>                           
+                            <Text style={{color:'#797979'}}>{item.limit}</Text>  
+                            <Text>{item.detail}</Text>                         
+                        </View>                                             
+                    </View>                 
+                </View>
+                <View style={GlobalStyles.line}/>
+            </View>        
+        )
+    }
+
     render() {
         const { search } = this.state;
         return (
         <View style={styles.container}>
-            <View style={styles.searchs}>
-                    <SearchBar  placeholder="项目 | 投资人" onChangeText={this.updateSearch} value={search}/>
-            </View>  
-            
-            <ScrollView ref="scrollView" horizontal={false} showsHorizontalScrollIndicator={false} style={{marginBottom:10}}>   
-                <Card image={require('../res/img/p1.jpg')} style={styles.Cards}>
-                <Text style={{marginBottom: 5,color:'#000',fontWeight:'bold'}}>纳米孔基因测序仪</Text>
-                <Text style={{marginBottom: 5}}>            
-                    近年来，基因测序市场正在快速增长。有分析认为，在2025年达到约244亿美元左右。基因测序是精准医疗...            
-                </Text>
-                <Text style={{marginBottom: 5,color:'gray'}}> 四川,成都</Text>       
-                </Card>
-                <Card image={require('../res/img/p2.jpg')} style={styles.Cards}>
-                <Text style={{marginBottom: 5,color:'#000',fontWeight:'bold'}}>纳米孔基因测序仪</Text>
-                <Text style={{marginBottom: 5}}>            
-                    近年来，基因测序市场正在快速增长。有分析认为，在2025年达到约244亿美元左右。基因测序是精准医疗...            
-                </Text>
-                <Text style={{marginBottom: 5,color:'gray'}}> 四川,成都</Text>       
-                </Card>
-                <Card image={require('../res/img/p1.jpg')} style={styles.Cards}>
-                <Text style={{marginBottom: 5,color:'#000',fontWeight:'bold'}}>纳米孔基因测序仪</Text>
-                <Text style={{marginBottom: 5}}>            
-                    近年来，基因测序市场正在快速增长。有分析认为，在2025年达到约244亿美元左右。基因测序是精准医疗...            
-                </Text>
-                <Text style={{marginBottom: 5,color:'gray'}}> 四川,成都</Text>       
-                </Card>
-                <Card image={require('../res/img/p2.jpg')} style={styles.Cards}>
-                <Text style={{marginBottom: 5,color:'#000',fontWeight:'bold'}}>纳米孔基因测序仪</Text>
-                <Text style={{marginBottom: 5}}>            
-                    近年来，基因测序市场正在快速增长。有分析认为，在2025年达到约244亿美元左右。基因测序是精准医疗...            
-                </Text>
-                <Text style={{marginBottom: 5,color:'gray'}}> 四川,成都</Text>       
-                </Card>
-                <Card image={require('../res/img/p1.jpg')} style={styles.Cards}>
-                <Text style={{marginBottom: 5,color:'#000',fontWeight:'bold'}}>纳米孔基因测序仪</Text>
-                <Text style={{marginBottom: 5}}>            
-                    近年来，基因测序市场正在快速增长。有分析认为，在2025年达到约244亿美元左右。基因测序是精准医疗...            
-                </Text>
-                <Text style={{marginBottom: 5,color:'gray'}}> 四川,成都</Text>       
-                </Card>
-            </ScrollView>
+             <Header placement="left" centerComponent={{ text: '投资人', style: { color: '#333'} }} 
+                    containerStyle={{backgroundColor: 'white'}}/>
+            <View style={styles.search}>
+                    <SearchBar  style={styles.searchs} lightTheme round placeholder="项目 | 投资人" 
+                    containerStyle={styles.searchContainer}
+                    inputContainerStyle={styles.inputContainerStyle}
+                    onChangeText={this.updateSearch} value={search}/>
+            </View>    
+            <View style={{padding:0,margin:0,width:'100%'}}>
+                    <FlatList  data={imgList}  renderItem={this.renderItem}
+                        keyExtractor={item =>item.id}/>
+            </View>                    
         </View>
         )
     }
@@ -71,16 +66,49 @@ export default InvestorPage;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        height:'100%'
+        height:'100%',
+        backgroundColor:'white',
         
     },
+     // 搜索栏
+     search:{
+        backgroundColor:'transparent',
+        marginBottom:0,
+        borderColor:'transparent'
+    },
     searchs:{
-        backgroundColor:'#fff',
+        backgroundColor:'white',
         opacity:0.8,
-        color:'#fff',
-        height: 60,
+        height: 50,
+        borderWidth:0,
+        shadowColor:'white'
     },
+    searchContainer:{
+      width:'100%',
+      backgroundColor:'white',
+      borderWidth:0,
+      shadowColor:'white',
+      borderBottomColor:'transparent',
+      borderTopColor:'transparent'
+    },
+    inputContainerStyle:{
+        
+    },
+
     Cards:{
-        height:170
+        height:170,
+        flexDirection:'row',
+        flex:1,
     },
+    left:{
+      flex:1,
+      width:100,
+      height:120,
+      paddingTop:25
+    },
+    right:{
+      flex:3,
+      marginTop:20,
+      paddingLeft:20
+    }
 });

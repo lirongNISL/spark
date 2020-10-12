@@ -16,7 +16,7 @@ class LoginPage extends Component<Props> {
             NavigationUtil.resetToHomPage({
                 navigation: this.props.navigation,
             });
-        }, 3000);
+        }, 1000);
     }
 
     componentWillUnmount() {
@@ -64,7 +64,8 @@ const styles = StyleSheet.create({
     button:{
         padding:5,
         borderRadius:4,
-        fontSize:16
+        fontSize:16,
+       
         
     }
 })

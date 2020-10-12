@@ -43,8 +43,8 @@ class Banner extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView
-                    ref="scrollView"
-                    horizontal={true}
+                    ref="scrollView" style='banner'
+                    horizontal={true} 
                     showsHorizontalScrollIndicator={false}
                     pagingEnabled={true}//自动分页
                     //滚动动画结束时调用此函数。一帧滚动结束
@@ -71,7 +71,7 @@ class Banner extends Component {
             index++;
             images.push(
                 <View key={i}>
-                    {<Image source={banner[i]} style={styles.image}/>}
+                    {<Image source={banner[i]} style={styles.images}/>}
                 </View>
             );
             
@@ -156,7 +156,13 @@ class Banner extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 8,
+        paddingTop: 8,
+        paddingBottom:8,
+        paddingLeft: 15,
+        paddingRight: 15,
+        backgroundColor:'white',
+        width:'100%',
+       
     },
     //底部指示器的样式
     indicator: {
@@ -169,10 +175,14 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems: 'center',
     },
-    image: {
+    banner:{
+        borderRadius:8,
+        width: width,
+    },
+    images: {
         width: width,
         height: 190,
-        borderRadius:8
+       
     },
     selected: {
         marginLeft: 10,
